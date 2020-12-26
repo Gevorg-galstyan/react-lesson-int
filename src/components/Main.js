@@ -1,7 +1,10 @@
 import React from 'react';
+import Product from './class/Product';
 
 export default function Main() {
     return(
-        <div></div>
+        <div>
+            <Product  />
+        </div>
     )
 }
