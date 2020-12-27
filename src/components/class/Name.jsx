@@ -4,9 +4,9 @@ export default class Name extends Component{
 
     render(){
         return(
-            <div className='Name'>
+            <h2 className='Name'>
                 {this.props.val}
-            </div>
+            </h2>
             
         )
     }

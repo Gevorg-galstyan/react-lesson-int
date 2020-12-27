@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -9,10 +10,6 @@ body {
 }
 *{
    box-sizing: border-box;
-}
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }
 .navbar{
   display: flex;
@@ -38,4 +35,16 @@ code {
 }
 .w-100{
   width: 100%;
+}
+.Name{
+  text-transform: uppercase;
+}
+.createBtn{
+  margin-top: 50px;
+}
+.infoContainer label{
+  display: block;
+} 
+.infoContainer .row{
+  margin: 0;
 }

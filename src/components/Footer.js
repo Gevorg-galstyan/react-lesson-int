@@ -1,7 +1,8 @@
 import React from 'react';
 
+
 function Cols(props) {
-    return(
+    return (
         <div>
             <div className='col-4'></div>
             <div className='col-4'></div>
@@ -11,10 +12,13 @@ function Cols(props) {
     );
 }
 
-export default function Footer(){
-    return(
-        <footer>
-            <Cols />
-        </footer>
+export default function Footer(props) {
+    return (
+        <>
+            <footer>
+                <Cols />
+            </footer>
+        
+        </>
     );
 }

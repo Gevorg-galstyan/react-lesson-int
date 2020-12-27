@@ -1,7 +1,9 @@
-import React from 'react';
- 
-function Navbar(props){
-    return(
+import React  from "react";
+import CreateToDo  from "../components/toDo/layouts/CreateToDo";
+
+function Navbar(props) {
+
+    return (
         <nav>
             <ul className="navbar">
                 <li><a href="https://maximumcode.net">{props.home}</a></li>
@@ -13,10 +15,10 @@ function Navbar(props){
     );
 }
 
-export default function Header(){
-    return(
+export default function Header() {
+    return (
         <header>
             <Navbar home="home" services="services" about="about" contact="contact" />
-        </header>      
+        </header>
     );
 }
