@@ -7,6 +7,7 @@ export default class Name extends Component{
             <div className='Name'>
                 {this.props.val}
             </div>
+            
         )
     }
 }
