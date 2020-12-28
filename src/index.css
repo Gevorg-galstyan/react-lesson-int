@@ -48,3 +48,30 @@ body {
 .infoContainer .row{
   margin: 0;
 }
+.toDo-name{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.toDo-name h3{
+  margin-left: 10px;
+  font-size: 21px;
+}
+.toDo-desc{
+  text-align: center;
+  word-wrap: break-all;
+}
+.toDo-desc h3{
+ margin-top: 20px;
+ font-weight: 400;
+ font-size: 15px;
+}
+.toDo-container{
+  margin-top: 20px;
+  border: 1px solid #72fb79;
+  padding: 20px 5px;
+}
+textarea, input{
+  width: 100%;
+}
