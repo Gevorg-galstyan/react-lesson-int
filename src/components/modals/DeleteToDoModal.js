@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Modal} from "react-bootstrap";
 import styles from "../../assets/css/style.module.css"
 
+
 function MyVerticallyCenteredModal(props) {
     return (
         <Modal className={styles.modal}
@@ -16,14 +17,14 @@ function MyVerticallyCenteredModal(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Footer>
-                <Button variant="danger" onClick={props.onHide}>Yes</Button>
+                <Button variant="danger" >Yes</Button>
                 <Button  onClick={props.onHide}>Cancel</Button>
             </Modal.Footer>
         </Modal>
     );
 }
 
-export default function DeleteToDoModal() {
+export default function DeleteToDoModal(props) {
     const [modalShow, setModalShow] = React.useState(false);
 
     return (
