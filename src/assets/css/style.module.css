@@ -1,0 +1,19 @@
+.active{
+    font-weight: 600;
+}
+.toDo-container{
+    position: relative;
+}
+.delModal{
+    display: block !important;
+    position: absolute;
+    padding: 0 !important;
+    height: 25px;
+    width: 25px;
+    top: 30px;
+    right: 25px;
+    font-size: 13px !important;
+}
+.modal .close{
+    display: none;
+}

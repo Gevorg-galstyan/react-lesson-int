@@ -1,5 +1,7 @@
 import React, {Component} from "react";
-import {Col, Row, Container} from "react-bootstrap";
+import {Col, Row, Container, Button, Modal} from "react-bootstrap";
+import DeleteToDoModal from "../modals/DeleteToDoModal";
+import styles from '../../assets/css/style.module.css';
 
 export default class CreateModalButton extends Component {
     constructor(props) {
@@ -11,7 +13,7 @@ export default class CreateModalButton extends Component {
             defaultEndDate: '',
             defaultDescription: '',
 
-        }
+        };
     }
 
     addName = (e) => {
@@ -60,16 +62,17 @@ export default class CreateModalButton extends Component {
     }
 
     render() {
-        let {defaultName, defaultStartDate, defaultEndDate, defaultDescription,toDo} = this.state;
+        let {defaultName, defaultStartDate, defaultEndDate, defaultDescription, toDo} = this.state;
 
         const component = Object.keys(toDo).map((key, index) => {
-            return(
+            return (
                 <Col md={4} key={index}>
                     <div className="toDo-container">
                         <div className='toDo-name'><h2>Name : </h2> <h3>{toDo[key].name}</h3></div>
                         <div className='toDo-name'><h2>Start Date</h2> <h3>{toDo[key].startDate}</h3></div>
                         <div className='toDo-name'><h2>End Date</h2><h3>{toDo[key].endDate}</h3></div>
                         <div className='toDo-desc'><h2>Description</h2><h3>{toDo[key].description}</h3></div>
+                        <DeleteToDoModal />
                     </div>
                 </Col>
             )
@@ -77,11 +80,12 @@ export default class CreateModalButton extends Component {
 
         return (
             <>
+
                 <div className="infoContainer">
                     <Container>
                         <Row>
                             <Col md={4}>
-                                <div><label htmlFor="">ToDo Name</label>
+                                <div><label htmlFor="" className={styles.active}>ToDo Name</label>
                                     <input type="text"
                                            onChange={this.addName}
                                            value={defaultName}/>
@@ -103,8 +107,8 @@ export default class CreateModalButton extends Component {
                             </Col>
                             <Col md={6}><label htmlFor="">ToDo Description</label>
                                 <textarea
-                                onChange={this.addDescription}
-                                value={defaultDescription}>
+                                    onChange={this.addDescription}
+                                    value={defaultDescription}>
                                 </textarea>
                             </Col>
                             <Col md={6}>
@@ -120,8 +124,9 @@ export default class CreateModalButton extends Component {
                         {component}
                     </Row>
                 </Container>
+
+
             </>
         )
     }
-
 }
