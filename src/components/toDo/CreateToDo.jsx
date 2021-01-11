@@ -1,28 +1,25 @@
 import React, {Component} from "react";
-import {Col, Row, Container} from "react-bootstrap";
+import {Col, Row, Container,Button} from "react-bootstrap";
+import DeleteToDoModal from "../modals/DeleteToDoModal";
+import styles from '../../assets/css/style.module.css';
+import { v4 as uuidv4 } from 'uuid';
 
 export default class CreateModalButton extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            toDo: {},
+            toDo: [],
             defaultName: '',
-            defaultStartDate: '',
+            defaultStartDate: new Date().toDateString(),
             defaultEndDate: '',
             defaultDescription: '',
 
-        }
+        };
     }
 
     addName = (e) => {
         this.setState({
             defaultName: e.target.value
-        })
-    };
-
-    addStartDate = (e) => {
-        this.setState({
-            defaultStartDate: e.target.value
         })
     };
 
@@ -39,37 +36,48 @@ export default class CreateModalButton extends Component {
     };
 
     addToDo = () => {
-        let {defaultName, defaultDescription, defaultStartDate, defaultEndDate} = this.state;
+        let {defaultName, defaultDescription, defaultEndDate} = this.state;
         let newTodo = {
-            [defaultName]: {
+                _id : uuidv4(),
                 name: defaultName.trim(),
-                startDate: defaultStartDate.trim(),
                 endDate: defaultEndDate.trim(),
                 description: defaultDescription.trim()
             }
-        }
+
 
         this.setState({
-            toDo: {...this.state.toDo, ...newTodo},
-
+            toDo: [...this.state.toDo, newTodo],
             defaultName: '',
-            defaultStartDate: '',
             defaultEndDate: '',
             defaultDescription: ''
         })
     }
 
-    render() {
-        let {defaultName, defaultStartDate, defaultEndDate, defaultDescription,toDo} = this.state;
+    deleteTask = (id) => {
+        const toDo = this.state.toDo;
+        const newToDo = toDo.filter((i)=> i._id !== id)
 
-        const component = Object.keys(toDo).map((key, index) => {
-            return(
+       this.setState({
+            toDo : newToDo
+       })
+    }
+
+    render() {
+        let {defaultName, defaultStartDate, defaultEndDate, defaultDescription, toDo} = this.state;
+        const component = toDo.map((key, index) => {
+            console.log(key, index)
+            return (
                 <Col md={4} key={index}>
                     <div className="toDo-container">
-                        <div className='toDo-name'><h2>Name : </h2> <h3>{toDo[key].name}</h3></div>
-                        <div className='toDo-name'><h2>Start Date</h2> <h3>{toDo[key].startDate}</h3></div>
-                        <div className='toDo-name'><h2>End Date</h2><h3>{toDo[key].endDate}</h3></div>
-                        <div className='toDo-desc'><h2>Description</h2><h3>{toDo[key].description}</h3></div>
+                        <div className='toDo-name'><h2>Name : </h2> <h3>{key.name}</h3></div>
+                        <div className='toDo-name'><h2>Start Date</h2><h3>{defaultStartDate}</h3></div>
+                        <div className='toDo-name'><h2>End Date</h2><h3>{new Date(key.endDate).toDateString()}</h3></div>
+                        <div className='toDo-desc'><h2>Description</h2><h3>{key.description}</h3></div>
+                        <DeleteToDoModal />
+                        <Button
+                            variant="danger"
+                            onClick={ () => this.deleteTask(key._id) }
+                        >Danger</Button>
                     </div>
                 </Col>
             )
@@ -77,21 +85,15 @@ export default class CreateModalButton extends Component {
 
         return (
             <>
+
                 <div className="infoContainer">
                     <Container>
                         <Row>
                             <Col md={4}>
-                                <div><label htmlFor="">ToDo Name</label>
+                                <div><label htmlFor="" className={styles.active}>ToDo Name</label>
                                     <input type="text"
                                            onChange={this.addName}
                                            value={defaultName}/>
-                                </div>
-                            </Col>
-                            <Col md={4}>
-                                <div><label htmlFor="">ToDo Start Date</label>
-                                    <input type="date"
-                                           onChange={this.addStartDate}
-                                           value={defaultStartDate}/>
                                 </div>
                             </Col>
                             <Col md={4}>
@@ -101,10 +103,10 @@ export default class CreateModalButton extends Component {
                                            value={defaultEndDate}/>
                                 </div>
                             </Col>
-                            <Col md={6}><label htmlFor="">ToDo Description</label>
+                            <Col md={4}><label htmlFor="">ToDo Description</label>
                                 <textarea
-                                onChange={this.addDescription}
-                                value={defaultDescription}>
+                                    onChange={this.addDescription}
+                                    value={defaultDescription}>
                                 </textarea>
                             </Col>
                             <Col md={6}>
@@ -120,8 +122,9 @@ export default class CreateModalButton extends Component {
                         {component}
                     </Row>
                 </Container>
+
+
             </>
         )
     }
-
 }
