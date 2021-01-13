@@ -84,7 +84,7 @@ export default class CreateModalButton extends Component {
     render() {
         let {defaultName, defaultStartDate, defaultEndDate, defaultDescription, toDo, selectedTasks} = this.state;
 
-        const component = toDo.map((key, index) => {
+        const component = toDo.map((key) => {
             return (
                 <Col md={4} key={key._id}>
                     <div className="toDo-container">
@@ -98,7 +98,9 @@ export default class CreateModalButton extends Component {
                         </div>
                         <div className='toDo-desc'><h2>Description</h2><h3>{key.description}</h3></div>
 
-                        <DeleteToDoModal/>
+                        <DeleteToDoModal approve={(param)=>{
+                            param && this.deleteTask(key._id)
+                        }}/>
 
                         <Button
                             variant="danger"
