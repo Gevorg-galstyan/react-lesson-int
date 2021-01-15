@@ -1,8 +1,9 @@
 import React, {Component} from "react";
 import {Col, Row, Container, Button} from "react-bootstrap";
-import DeleteToDoModal from "../modals/DeleteToDoModal";
 import styles from '../../assets/css/style.module.css';
 import {v4 as uuidv4} from 'uuid';
+import NewTask from "./NewTask";
+
 
 export default class CreateModalButton extends Component {
 
@@ -82,40 +83,9 @@ export default class CreateModalButton extends Component {
     }
 
     render() {
-        let {defaultName, defaultStartDate, defaultEndDate, defaultDescription, toDo, selectedTasks} = this.state;
-
-        const component = toDo.map((key) => {
-            return (
-                <Col md={4} key={key._id}>
-                    <div className="toDo-container">
-
-                        <input type="checkbox" onChange={() => this.selectTask(key._id)}/>
-
-                        <div className='toDo-name'><h2>Name : </h2> <h3>{key.name}</h3></div>
-                        <div className='toDo-name'><h2>Start Date</h2><h3>{defaultStartDate}</h3></div>
-                        <div className='toDo-name'>
-                            <h2>End Date</h2><h3>{new Date(key.endDate).toDateString()}</h3>
-                        </div>
-                        <div className='toDo-desc'><h2>Description</h2><h3>{key.description}</h3></div>
-
-                        <DeleteToDoModal approve={(param)=>{
-                            param && this.deleteTask(key._id)
-                        }}/>
-
-                        <Button
-                            variant="danger"
-                            onClick={() => this.deleteTask(key._id)}
-                            disabled={selectedTasks.size}
-                        >
-                            Delete</Button>
-                    </div>
-                </Col>
-            )
-        });
-
+        let {defaultName, defaultEndDate, defaultDescription, selectedTasks} = this.state;
         return (
             <>
-
                 <div className="infoContainer">
                     <Container>
                         <Row>
@@ -157,11 +127,12 @@ export default class CreateModalButton extends Component {
                     </Container>
                 </div>
 
-
                 <Container>
-                    <Row>
-                        {component}
-                    </Row>
+                    <NewTask
+                        state={this.state}
+                        deleteTask={this.deleteTask}
+                        selectTask = {this.selectTask}
+                    />
                     <Row>
                         <Col className="text-center mt-3">
                             <Button variant={"danger"} disabled={!selectedTasks.size}
