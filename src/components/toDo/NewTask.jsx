@@ -1,16 +1,18 @@
 import React, {Component} from "react";
 import {Button, Col, Row} from "react-bootstrap";
 import DeleteToDoModal from "../modals/DeleteToDoModal";
-import EditToDoModal from "../modals/EditToDoModal";
+import EditToDo from "./EditToDo";
+import styles from "../../assets/css/style.module.css"
 
-export default class NewTask extends Component{
+
+export default class NewTask extends Component {
     render() {
         let {defaultStartDate, toDo, selectedTasks} = this.props.state;
 
         const component = toDo.map((key) => {
             return (
                 <Col md={4} key={key._id}>
-                    <div className="toDo-container">
+                    <div className={styles.toDoContainer}>
 
                         <input type="checkbox" onChange={() => this.props.selectTask(key._id)}/>
 
@@ -21,14 +23,18 @@ export default class NewTask extends Component{
                         </div>
                         <div className='toDo-desc'><h2>Description</h2><h3>{key.description}</h3></div>
 
-                        <DeleteToDoModal approve={(param) => {
-                            param && this.props.deleteTask(key._id)
-                        }}/>
+                        <DeleteToDoModal
+                            approve={(param) => {
+                                param && this.props.deleteTask(key._id)
+                            }}
+                        />
 
-                        <EditToDoModal approve={(param) => {
-                            param && this.props.deleteTask(key._id)
-                        }}/>
 
+                        <EditToDo
+                            keyId={key._id}
+                            state={this.props.state}
+                            editTask={this.props.editTask}
+                        />
                         <Button
                             variant="danger"
                             onClick={() => this.props.deleteTask(key._id)}

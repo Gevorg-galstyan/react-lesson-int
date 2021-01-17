@@ -1,9 +1,7 @@
 import React, {Component} from "react";
 import {Col, Row, Container, Button} from "react-bootstrap";
-import styles from '../../assets/css/style.module.css';
-import {v4 as uuidv4} from 'uuid';
 import NewTask from "./NewTask";
-
+import TaskInputs from "./TaskInputs";
 
 export default class CreateModalButton extends Component {
 
@@ -12,39 +10,11 @@ export default class CreateModalButton extends Component {
         this.state = {
             toDo: [],
             selectedTasks: new Set(),
-            defaultName: '',
-            defaultStartDate: new Date().toDateString(),
-            defaultEndDate: '',
-            defaultDescription: '',
         };
     }
 
-    addName = (e) => {
-        this.setState({
-            defaultName: e.target.value
-        })
-    };
 
-    addEndDate = (e) => {
-        this.setState({
-            defaultEndDate: e.target.value
-        })
-    };
-
-    addDescription = (e) => {
-        this.setState({
-            defaultDescription: e.target.value
-        })
-    };
-
-    addToDo = () => {
-        let {defaultName, defaultDescription, defaultEndDate} = this.state;
-        let newTodo = {
-            _id: uuidv4(),
-            name: defaultName.trim(),
-            endDate: defaultEndDate.trim(),
-            description: defaultDescription.trim()
-        }
+    addToDo = (newTodo) => {
         this.setState({
             toDo: [...this.state.toDo, newTodo],
             defaultName: '',
@@ -52,6 +22,17 @@ export default class CreateModalButton extends Component {
             defaultDescription: ''
         })
     }
+
+
+    editTask = (newTodo) => {
+        console.log(newTodo)
+        console.log(this.state)
+
+        this.setState({
+            toDo: newTodo['toDo'],
+        })
+    }
+
 
     deleteTask = (id) => {
         const toDo = this.state.toDo;
@@ -83,46 +64,16 @@ export default class CreateModalButton extends Component {
     }
 
     render() {
-        let {defaultName, defaultEndDate, defaultDescription, selectedTasks} = this.state;
+        let { selectedTasks} = this.state;
         return (
             <>
                 <div className="infoContainer">
                     <Container>
                         <Row>
-                            <Col md={4}>
-                                <div><label htmlFor="" className={styles.active}>ToDo Name</label>
-                                    <input type="text"
-                                           onChange={this.addName}
-                                           value={defaultName}
-                                           disabled={selectedTasks.size}
-                                    />
-                                </div>
-                            </Col>
-                            <Col md={4}>
-                                <div><label htmlFor="">ToDo End Date</label>
-                                    <input type="date"
-                                           onChange={this.addEndDate}
-                                           value={defaultEndDate}
-                                           disabled={selectedTasks.size}
-                                    />
-                                </div>
-                            </Col>
-                            <Col md={4}><label htmlFor="">ToDo Description</label>
-                                <textarea
-                                    onChange={this.addDescription}
-                                    value={defaultDescription}
-                                    disabled={selectedTasks.size}
-                                >
-                                </textarea>
-                            </Col>
-                            <Col md={6}>
-                                <button
-                                    className='createBtn'
-                                    onClick={this.addToDo}
-                                    disabled={selectedTasks.size}
-                                >Add ToDo
-                                </button>
-                            </Col>
+                            <TaskInputs
+                                selectedTasks={this.state.selectedTasks}
+                                onAddTask = {this.addToDo}
+                            />
                         </Row>
                     </Container>
                 </div>
@@ -132,6 +83,7 @@ export default class CreateModalButton extends Component {
                         state={this.state}
                         deleteTask={this.deleteTask}
                         selectTask = {this.selectTask}
+                        editTask = {this.editTask}
                     />
                     <Row>
                         <Col className="text-center mt-3">

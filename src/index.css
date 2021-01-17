@@ -67,11 +67,7 @@ body {
  font-weight: 400;
  font-size: 15px;
 }
-.toDo-container{
-  margin-top: 20px;
-  border: 1px solid #72fb79;
-  padding: 20px 5px;
-}
+
 textarea, input{
   width: 100%;
 }

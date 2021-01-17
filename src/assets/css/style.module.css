@@ -2,7 +2,14 @@
     font-weight: 600;
 }
 .toDo-container{
+
+}
+.toDoContainer{
     position: relative;
+    margin-top: 20px;
+    border: 1px solid #72fb79;
+    padding: 20px 5px;
+    text-align: center;
 }
 .delModal{
     display: block !important;
