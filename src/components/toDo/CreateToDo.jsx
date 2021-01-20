@@ -25,9 +25,6 @@ export default class CreateModalButton extends Component {
 
 
     editTask = (newTodo) => {
-        console.log(newTodo)
-        console.log(this.state)
-
         this.setState({
             toDo: newTodo['toDo'],
         })
@@ -64,7 +61,7 @@ export default class CreateModalButton extends Component {
     }
 
     render() {
-        let { selectedTasks} = this.state;
+        let {selectedTasks} = this.state;
         return (
             <>
                 <div className="infoContainer">
@@ -72,7 +69,7 @@ export default class CreateModalButton extends Component {
                         <Row>
                             <TaskInputs
                                 selectedTasks={this.state.selectedTasks}
-                                onAddTask = {this.addToDo}
+                                onAddTask={this.addToDo}
                             />
                         </Row>
                     </Container>
@@ -82,8 +79,8 @@ export default class CreateModalButton extends Component {
                     <NewTask
                         state={this.state}
                         deleteTask={this.deleteTask}
-                        selectTask = {this.selectTask}
-                        editTask = {this.editTask}
+                        selectTask={this.selectTask}
+                        editTask={this.editTask}
                     />
                     <Row>
                         <Col className="text-center mt-3">

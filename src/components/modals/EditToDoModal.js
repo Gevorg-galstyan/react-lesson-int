@@ -39,9 +39,10 @@ function CreateEditInputs(props) {
                     onChange={(e) => singleInput(e.target, props.inputVals, inputs[0]._id)}
                 />
             </InputGroup>
-            <InputGroup className="mb-3">
+            <InputGroup  className="mb-3">
                 <label className={'w-100'}>TODO DESCRIPTION</label>
                 <FormControl
+                    as={"textarea"}
                     name={'description'}
                     placeholder={inputs[0].description}
                     onChange={(e) => singleInput(e.target, props.inputVals,inputs[0]._id)}

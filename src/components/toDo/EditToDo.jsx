@@ -15,10 +15,7 @@ export default class EditToDo extends Component {
 
         const simToDo = toDo.filter(item => item._id === id);
 
-        inpType === 'name' ? simToDo[0].name = val : simToDo[0].name = simToDo[0].name ;
-        inpType === 'endDate' ? simToDo[0].endDate = new Date(val).toDateString() : simToDo[0].endDate = simToDo[0].endDate ;
-        inpType === 'description' ? simToDo[0].description = val : simToDo[0].description = simToDo[0].description;
-
+        simToDo[0][inpType] = val.trim();
 
         const result = toDo.map(x => {
             const item = simToDo.find(({ _id }) => _id === x._id);
@@ -28,7 +25,7 @@ export default class EditToDo extends Component {
         this.setState({
             toDo: result
         },() => {
-            console.log(this.state);
+
         })
 
     }
